@@ -1,0 +1,81 @@
+-----------------------------------RAW DATA--------------------------------------
+Plan Management system								|
+----------------------								|
+1) DataBase									|
+{										|
+Table name :									|
+I)	Customer								|
+Fields : - id smallint autoincrement primary key				|
+	 - name varchar(30)							|
+	 - mob int								|
+	 - description text 							|
+II)	Plan									|
+Fields	 - id smallint primary key						|
+	 - Area int 								|
+	 - Total int     // total = advance + due				|
+	 - advance int								|
+	 - due int	// due = total - adv					|
+	 - status boolean							|
+	 - paid boolean								|
+}										|
+2) Language (c)									|
+{										|
+i)	Authority  given to 							|
+	I)User									|
+		insert								|
+		change status							|
+		display - all , completed , incompleted				|
+		searching (id, name)						|
+	II)Admin								|
+		insert								|
+		change status							|
+		display - all , completed , incompleted				|
+		searching (id, name)						|
+		delete (id, name)						|
+}										|
+---------------------------------------------------------------------------------
+Description :-
+------------
+-This project is made for handling the plan made by the civil Engineers.
+-In this project they are two type of user login 
+	I) admin (it has password for login)  Password - "admin" ( you can chage in login.c)
+	II)user	 (anybody can login)
+- Here only admin has the right to delete the data in the application rest functions are similar as user.
+- The functionality both user and admin can execute is 
+	i)	insert 
+	ii)	search (it can be done by mobile)
+	iii)	display
+	iv)	change status(completed or not)
+	v)	payment status(change to complete)
+Process or Procedure to execute the application
+-----------------------------------------------
+I) 	it is a linux based application use any linux
+	a)install gcc
+	if you are using red hat distibutor linux
+		command : sudo apt install gcc
+	if you are using debian distibutor linux
+		command : sudo yum install gcc
+	b)install mysql
+	if you are using red hat distibutor linux
+		command : sudo apt install mysql-server
+	if you are using debian distibutor linux
+		command : sudo yum install mysql-server
+II)	now Database setup
+	create database
+		command : create database database_name;
+	use that database
+		command : use database_name;
+	create table 
+		command : create table customer(uid shortint primary key auto_increment,name varchar(30),mobile bigint,description text);
+		command : create table customer(uid shortint foreign key auto_increment,status boolean,area decimal(8,3),advance decimal(5,0),total decimal(5,0),due decimal(5,0) generated always as (total - advance) virtual generated,paid boolean);
+	update table
+		command : update table customer,plan auto_increment = 1;
+III)	Now open login.c and may change password
+	in functions.c 
+		- in function connect_to_db()
+			write the database name and password that you provide
+IV)	Run the application
+	command : make	
+	type in terminal
+	project works successfully
+---------------------------------------------------------------PROJECT COMPLETED--------------------------------------------------------------------------- 
